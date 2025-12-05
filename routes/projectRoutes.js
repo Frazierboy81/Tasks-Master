@@ -3,7 +3,7 @@ const {createProject} = require('../controllers/projectController')
 const Project = require('../models/Project')
 
 const { authMiddleware } = require('../middlewares/auth');
-const { registerUser } = require('../../../Mod 14/sba-14/controllers/userController');
+const { registerUser } = require('../controllers/userController');
 
 const projectRouter = express.Router();
 
