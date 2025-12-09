@@ -13,6 +13,9 @@ taskRouter.use(authMiddleware);
 taskRouter.get("/api/projects/:projectId/tasks", async (req, res) => {
     try {
         const userTasks = await Tasks.find({user: req.user._id});
+        if (req.user._id !== userTasks.user) {
+            return res.status(400).json(error)
+        }
         res.json(userTasks);
     } catch (error) {
         console.error(error);

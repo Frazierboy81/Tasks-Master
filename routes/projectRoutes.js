@@ -24,7 +24,7 @@ const NotLoggedIn = (req, res, next) => {
  */
 projectRouter.get("/", async (req, res) => {
   try {
-    const userProjects = await Project.find({ user: req.user.id});
+    const userProjects = await Project.find({ user: req.user._id });
     res.json(userProjects);
   } catch (error) {
     console.error(error);
