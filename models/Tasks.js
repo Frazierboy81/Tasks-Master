@@ -13,8 +13,9 @@ const taskSchema = new Schema ({
     status: {
         type: String,
         required: true,
-        enum: []
-    },
+        default: 'to do',
+        enum: ['to do', 'in-progress', 'completed']
+    }
 })
 
 const Tasks = model("Tasks", taskSchema)

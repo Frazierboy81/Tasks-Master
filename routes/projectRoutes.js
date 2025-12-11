@@ -43,6 +43,23 @@ projectRouter.get("/:projectId", async (req, res) => {
         .json({ message: `Project with id: ${projectId} not found!` });
     }
 
+    projectRouter.delete('/:projectId', async (req, res) => {
+  try {
+    // This needs an authorization check
+    const projectDelete = await Project.findById(req.params._id)
+    if (req.user._id !== projectDelete ) {
+        return res.status(403).json({message: "You are unable to delete this note"})
+    }
+    const delProject = await Project.findByIdAndDelete(req.params._id);
+    if (!delProject) {
+      return res.status(404).json({ message: 'No note found with this id!' });
+    }
+    res.json({ message: 'Project deleted!' });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
     // Authorization
     console.log(req.user._id);
     console.log(project.user);
